@@ -1,0 +1,86 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(252, 245, 45);
+  }
+
+  .frase{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    position: relative;
+    top: 100px;
+    margin-top: 60px;
+    animation: subirDescer 3s infinite alternate;
+  }
+  @keyframes subirDescer {
+    0% {
+        top: 0;
+    }
+    100% {
+        top:30px;
+    }
+}
+  
+  .circle {
+    width: 290px; 
+    height: 290px; 
+    border-radius: 50%;
+    margin-right: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .red {
+    background-color: red;
+  }
+
+  img.red2 {
+    max-width: 75%;
+    animation: subirDescer 3s infinite alternate;
+  }
+
+  .yellow {
+    background-color: yellow;
+  }
+
+  img.yellow3 {
+    max-width: 60%;
+    animation: subirDescer 3s infinite alternate;
+  }
+
+  .green {
+    background-color: green;
+  }
+
+  img.green4 {
+    max-width: 58%;
+    animation: subirDescer 3s infinite alternate;
+  }
+  @media screen and (max-width: 768px) {
+    body{
+      display: flex;
+      flex-direction: column ;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+        margin-top: 10px; /* Ajuste conforme necessário */
+    }
+
+    .circle {
+        width: 80%; /* Ajuste conforme necessário */
+        max-width: 200px;
+    }
+    img{
+      width: 300px;
+      height: 300px;
+    }
+}

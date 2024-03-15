@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="br-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaforo divertidamente</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="bg">    
+    <nav>
+      <h1 style="text-align: center;">Semaforo Divertidamente</h1>
+      <ul style="list-style-type: none; padding: 0; text-align: center;">
+      </ul>
+    </nav>
+    <main class="container">
+        <div class="circle">
+            <img id="imageContainer" class="red2">
+        </div>
+        <div class="frase" id="frase">
+ 
+        </div>
+    </main>
+    <audio id="statusSound">
+        <source src="Mystical Wind Chimes Transition FX" type="audio/mp3">
+       
+      </audio>
+  
+ 
+</body>
+<script>
+    
+
+   function atualizarStatus() {
+    //alert('loop');
+    // const audio = new Audio('Mystical Wind Chimes Transition FX');
+    // audio.play();
+    playSound();
+
+       fetch("https://niloweb.com.br/transit-room/api/reg_endpoint.php")
+       .then(resposta => resposta.json())
+       .then(dados1 => {
+           let bg = document.getElementById("bg");
+           let imageContainer = document.getElementById('imageContainer');
+           let frase = document.getElementById('frase');
+           let fra = document.createElement('p');
+           let image = document.createElement('img');
+           let mensagem = ''; // Variável para armazenar a frase
+
+           if (dados1[0].res == "B") {
+               imageContainer.src = 'images/raiva.png'; // Substitua pelo caminho da imagem vermelha
+               image.alt = 'Imagem Vermelha'; // Substitua pelo texto alternativo da imagem vermelha
+               document.querySelector('div').className = 'circle red';
+               document.querySelector('img').className = ' red2';
+               mensagem = 'Finalmente! Estou tão bravo por ter que esperar tanto para sair desta sala! Estou prestes a explodir !'; // Defina a frase para a condição de raiva
+               bg.style.backgroundColor = 'red';
+            //    document.getElementById('statusSound').play();
+               
+           } else if (dados1[0].res == "L") {
+               imageContainer.src = 'images/nojinho.png'; // Substitua pelo caminho da imagem verde
+               image.alt = 'Imagem Verde'; // Substitua pelo texto alternativo da imagem verde
+               document.querySelector('div').className = 'circle green';
+               document.querySelector('img').className = ' green4';
+               mensagem = 'De volta à sala de aula de programação, e até os bits estão fazendo bleh'; // Defina a frase para a condição de tranquilo
+               bg.style.backgroundColor = 'green';
+            //    document.getElementById('statusSound').play();
+               playSound() 
+           } else {
+               imageContainer.src = 'images/alegria.png'; // Substitua pelo caminho da imagem amarela
+               image.alt = 'Imagem Amarela'; // Substitua pelo texto alternativo da imagem amarela
+               document.querySelector('div').className = 'circle yellow';
+               document.querySelector('img').className = ' yellow3';
+               mensagem = 'Minha felicidade está prestes a explodir enquanto aguardo ansiosamente na fila'; // Defina a frase para a condição de felicidade
+               bg.style.backgroundColor = 'yellow';
+            //    document.getElementById('statusSound').play();
+               playSound() 
+           }
+
+           
+           // Limpar o conteúdo anterior
+           frase.innerHTML = '';
+           // Adicione a frase ao elemento de parágrafo
+           fra.textContent = mensagem;
+           frase.appendChild(fra);
+           imageContainer.appendChild(image);
+
+         
+       });
+   }
+       
+
+   atualizarStatus();
+       
+        const audio = new Audio('Mystical Wind Chimes Transition FX');
+
+        function playSound() {
+            const audio = new Audio('Mystical Wind Chimes Transition FX');
+            audio.onended = function() {
+            };
+            audio.play();
+        }
+        setInterval(atualizarStatus, 5000);
+  
+</script>
+</html>
